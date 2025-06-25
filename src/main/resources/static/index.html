@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Students</title>
+</head>
+<body>
+  <h1>Students</h1>
+  <ul id="student-list"></ul>
+
+  <script>
+    fetch('/students')
+      .then(response => response.json())
+      .then(data => {
+        const ul = document.getElementById('student-list');
+        data.forEach(student => {
+          const li = document.createElement('li');
+          li.textContent = `${student.name} - Marks: ${student.marks}`;
+          ul.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
