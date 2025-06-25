@@ -1,4 +1,4 @@
-package com.raghu.spring_data_jpa_ex;
+package com.raghu.spring_data_jpa_ex.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
