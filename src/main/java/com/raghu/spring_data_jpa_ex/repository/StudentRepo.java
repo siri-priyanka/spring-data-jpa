@@ -1,4 +1,4 @@
-package com.raghu.spring_data_jpa_ex;
+package com.raghu.spring_data_jpa_ex.repository;
 
 import com.raghu.spring_data_jpa_ex.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
