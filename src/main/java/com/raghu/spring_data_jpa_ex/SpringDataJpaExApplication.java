@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.boot.CommandLineRunner;
 // import org.springframework.context.ApplicationContext;
 
-import com.raghu.spring_data_jpa_ex.entity.Student;
+import com.raghu.spring_data_jpa_ex.model.Student;
 import com.raghu.spring_data_jpa_ex.repository.StudentRepo;
 
 // import java.util.List;
