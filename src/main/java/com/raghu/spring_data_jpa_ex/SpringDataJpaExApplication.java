@@ -1,9 +1,14 @@
 // package com.raghu.spring_data_jpa_ex;
 
 // import com.raghu.spring_data_jpa_ex.model.Student;
-// import org.springframework.boot.SpringApplication;
-// import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.boot.CommandLineRunner;
 // import org.springframework.context.ApplicationContext;
+
+import com.raghu.spring_data_jpa_ex.entity.Student;
+import com.raghu.spring_data_jpa_ex.repository.StudentRepo;
 
 // import java.util.List;
 // import java.util.Optional;
