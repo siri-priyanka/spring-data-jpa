@@ -1,10 +1,10 @@
-// package com.raghu.spring_data_jpa_ex;
+package com.raghu.spring_data_jpa_ex;
 
 // import com.raghu.spring_data_jpa_ex.model.Student;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.boot.CommandLineRunner;
 // import org.springframework.context.ApplicationContext;
 
 import com.raghu.spring_data_jpa_ex.model.Student;
@@ -72,23 +72,41 @@ import com.raghu.spring_data_jpa_ex.repository.StudentRepo;
 
 // }
 
-@SpringBootApplication
+@SpringBootApplication(
+    exclude = {
+        // This line prevents auto-configuration of R2DBC (Reactive DB),
+        // which is causing issues due to missing classes like ValidationDepth.
+        org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration.class
+    }
+)
 public class SpringDataJpaExApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringDataJpaExApplication.class, args);
-	}
+    public static void main(String[] args) {
+        // This starts the Spring Boot application
+        SpringApplication.run(SpringDataJpaExApplication.class, args);
+    }
 
-	@Bean
-	public CommandLineRunner run(StudentRepo repo) {
-		return args -> {
-			Student s3 = new Student();
-			s3.setRollNo(101);
-			s3.setName("Kodali");
-			s3.setMarks(92);
+    // CommandLineRunner runs after the Spring context is initialized
+    @Bean
+    public CommandLineRunner run(StudentRepo repo) {
+        return args -> {
+            // Creating a new Student object with roll number 101
+            Student s3 = new Student();
+            s3.setRollNo(101);
+            s3.setName("Kodali");
+            s3.setMarks(92);
 
-			repo.delete(s3);  // Or better: repo.deleteById(101);
-			System.out.println("Student deleted successfully.");
-		};
-	}
+            // Instead of blindly deleting, we check if student exists
+            if (repo.existsById(101)) {
+                repo.deleteById(101); // Safer deletion using ID
+                System.out.println("Student with roll number 101 deleted successfully.");
+            } else {
+                System.out.println("Student with roll number 101 not found.");
+            }
+
+            // To save the student instead of deleting, comment the above block
+            // and uncomment below line:
+            // repo.save(s3);
+        };
+    }
 }
